@@ -64,3 +64,36 @@
 # date docs are at: http://ruby-doc.org/core/classes/Date.html
 # don't spend too much time worrying about them :)
 require 'date'
+
+class User
+	attr_accessor :username, :blogs
+	
+	def initialize(username)
+		@username = username
+		@blogs = []
+	end	
+
+	def add_blog(date, text)
+		new_blog = Blog.new(date, self, text)
+		@blogs<<new_blog
+	end
+
+	def print_blogs
+		@blogs = @blogs.sort{|b| b.date}.reverse
+		puts @blogs.to_s
+	end	
+end
+
+class Blog
+	attr_accessor :date, :user, :text
+	def initialize(date,user,text)
+		@date = date
+		@user = user
+		@text = text
+		@user.add_blog(@date,@text)
+	end
+end	
+
+lissa = User.new 'QTSort'
+blog1 = Blog.new Date.parse("2007-01-02"), lissa, "Going dancing!"   
+lissa.print_blogs

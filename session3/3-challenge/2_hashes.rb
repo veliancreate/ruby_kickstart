@@ -8,3 +8,21 @@
 # staircase 4  # => {1 => [], 3 => [2]}
 # staircase 5  # => {1 => [], 3 => [2], 5 =>[2, 4]}
 
+def staircase(n)
+	a=[]
+	b=[]
+	c={}
+	(1..n).each do |mod|
+		if mod %2 != 0 
+			a<<mod
+		else 
+			b<<mod
+		end	
+	end
+	a.each{|i|
+		hash_vs = b.select{|v| v<i}
+		c={i => hash_vs}
+	}
+	puts c.to_s
+end	
+staircase(9)

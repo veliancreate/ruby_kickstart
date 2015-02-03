@@ -5,3 +5,13 @@
 # There will be no punctuation in the strings.
 #
 # first_pos "The dog and the cat and the cow" # => {"The" => 0, "dog" => 1, "and" => 2, "the" => 3, "cat" => 4, "cow" => 7}
+def first_pos(string)
+	ret_words = {}
+	ret_inds = []
+	string_split = string.split
+	string_split.each_with_index{|v,k|
+		ret_inds<<string_split.index(string_split[k])
+	}
+	puts ret_words=Hash[string_split.zip(ret_inds)]
+end	
+first_pos("The dog and the cat and the cow")

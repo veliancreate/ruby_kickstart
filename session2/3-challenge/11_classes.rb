@@ -18,3 +18,50 @@
 # if the parameter is greater than 99, set the number of beer bottles to 99
 # Then make a public method called print_song that outputs all stanzas from the number of bottles of beer down to zero.
 # Add any additional methods you find helpful.
+class BeerSong
+	attr_accessor :bottles
+	def initialize(bottles)
+		if bottles > 99
+			bottles = 99
+		elsif bottles < 0 
+			bottles = 0
+		end			 
+		@bottles = bottles
+	end
+	
+	def print_song
+		while @bottles>0
+			play_song(@bottles)
+			@bottles-=1
+		end	
+	end	
+
+	def englishify(num)
+		ones = %w(zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen)
+		tens = {2=>'twenty',3=>'thirty',4=>'fourty',5=>'fifty',6=>'sixty',7=>'seventy',8=>'eighty',9=>'ninety'}
+		if num<=19 
+			ones[num]	
+		elsif num >=20 and num%10==0 
+			tens[num/10]
+		else num >=20 and num%10!=0
+			tens[num/10]+'-'+ones[num%10]	
+		end	
+	end	
+	
+	def b(num)
+		if num == 1 then b="bottle" else b="bottles" end
+	end
+	
+	def play_song(num)
+		if num == 0 
+			String.new
+		else 
+			play=	"#{englishify num} #{b num} of beer on the wall,",
+					"#{englishify num} #{b num} of beer,",
+					"Take one down, pass it around,",
+					"#{englishify num-1} #{b num-1} of beer on the wall."		
+			play.map{|l| l.capitalize!}
+			puts play			
+		end
+	end	
+end		

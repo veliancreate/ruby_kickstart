@@ -13,3 +13,12 @@
 # mod_three [7]  # => [1]
 #
 # mod_three [0,1,2,3,4,5,6,7] # => [1, 2, 1, 2, 1]
+
+def mod_three(arr)
+	ret_array=[]
+	arr.each{|v|
+		mod = v%3
+		ret_array << mod if mod !=0
+	}
+	ret_array
+end	

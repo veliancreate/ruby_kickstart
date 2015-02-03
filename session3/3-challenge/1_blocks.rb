@@ -3,3 +3,13 @@
 #
 # reverse_map(1, 2, 3) { |i| i * 2 }      # => [6, 4, 2]
 
+def reverse_map(*args)
+	a=args.map{|i|
+		yield(i)
+	}.reverse
+end
+puts reverse_map	
+
+# def reverse_map(*args, &block)
+# 	args.map(&block).reverse
+# end	

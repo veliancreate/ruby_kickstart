@@ -11,8 +11,7 @@ class User
   def add_blog(date, text)
     added_blog = Blog.new(date, self, text)
     blogs << added_blog
-    self.blogs = blogs.sort_by { |blog| blog.date }.reverse
-    added_blog
+    p self.blogs = blogs.sort_by { |blog| blog.date }.reverse
   end
 end
 
@@ -36,55 +35,57 @@ class Blog
   end
 
   def ==(other)
-    date   == other.date &&
+      date == other.date &&
       user == other.user &&
       text == other.text
   end
 end
+lissa = User.new 'QTSort'
+blog1=Blog.new Date.parse("2007-01-02"), lissa, "Going dancing!"  
+lissa.add_blog Date.parse("2010-05-28") , "Sailor Mars is my favourite"
+blog1=Blog.new Date.parse("2007-01-02"), lissa, "Going dancing!"  
+# #Sebastien
+# class User
+#   attr_accessor :username, :blogs
 
+#   def initialize(username)
+#     self.username, self.blogs = username, Array.new
+#   end
 
-#Sebastien
-class User
-  attr_accessor :username, :blogs
+#   def add_blog(date, text)
+#     Blog.new date, self, text
+#   end
 
-  def initialize(username)
-    self.username, self.blogs = username, Array.new
-  end
+#   def blogs
+#      @blogs.sort! { |blog1, blog2| blog2.date <=> blog1.date }
+#   end
 
-  def add_blog(date, text)
-    Blog.new date, self, text
-  end
+# end
 
-  def blogs
-     @blogs.sort! { |blog1, blog2| blog2.date <=> blog1.date }
-  end
+# class Blog
+#   attr_accessor :date, :user, :text
 
-end
+#   def initialize(date, user, text)
+#     self.date, self.user, self.text = date, user, text
+#     user.blogs << self
+#   end
 
-class Blog
-  attr_accessor :date, :user, :text
+#   def summary
+#     summary = ""
+#     get = @text.split(/ /)
+#     get.each_index do |word|
+#       summary << get[word] << " " if word < 10
+#     end
+#     summary.strip
+#   end
 
-  def initialize(date, user, text)
-    self.date, self.user, self.text = date, user, text
-    user.blogs << self
-  end
-
-  def summary
-    summary = ""
-    get = @text.split(/ /)
-    get.each_index do |word|
-      summary << get[word] << " " if word < 10
-    end
-    summary.strip
-  end
-
-  def display_entry
-    puts user.username + " " + date.to_s
-    puts text
-  end
-  def ==(other)
-    self.date == other.date && 
-    self.user == other.user && 
-    self.text == other.text
-  end
-end
+#   def display_entry
+#     puts user.username + " " + date.to_s
+#     puts text
+#   end
+#   def ==(other)
+#     self.date == other.date && 
+#     self.user == other.user && 
+#     self.text == other.text
+#   end
+# end
